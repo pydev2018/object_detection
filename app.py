@@ -61,7 +61,7 @@ else:
     demo_image = DEMO_IMAGE
     image = np.array(Image.open(demo_image))
     
-st.image(image)
+st.image(image, use_column_width=True)
 
 def generate_results(image):
     detections = process_image(image)
