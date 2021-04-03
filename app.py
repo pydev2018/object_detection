@@ -51,7 +51,7 @@ def annotate_image(
 st.title("Object detection with MobileNet SSD")
 img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
 confidence_threshold = st.slider(
-    "Confidence threshold", 0.0, 1.0, DEFAULT_CONFIDENCE_THRESHOLD, 0.05
+    "Set the Confidence threshold with slider and press the Detect button ", 0.0, 1.0, DEFAULT_CONFIDENCE_THRESHOLD, 0.05
 )
 
 if img_file_buffer is not None:
@@ -60,12 +60,27 @@ if img_file_buffer is not None:
 else:
     demo_image = DEMO_IMAGE
     image = np.array(Image.open(demo_image))
+    
+st.image(image)
 
-detections = process_image(image)
-image, labels = annotate_image(image, detections, confidence_threshold)
+def generate_results(image):
+    detections = process_image(image)
+    image, labels = annotate_image(image, detections, confidence_threshold)
+    return image , labels
+    
+    
 
-st.image(
-    image, caption=f"Processed image", use_column_width=True,
-)
+#detections = process_image(image)
+#image, labels = annotate_image(image, detections, confidence_threshold)
 
-st.write(labels)
+
+
+if st.button("Detect from image"):
+    image , labels = generate_results(image)
+    
+    
+    st.image(
+        image, caption=f"Processed image", use_column_width=True,
+    )
+
+    st.write(labels)
