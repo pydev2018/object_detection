@@ -1,5 +1,5 @@
-streamlit==0.52.1
-opencv-python==4.1.2.30
+streamlit
+opencv-python
 opencv-python-headless
 opencv-contrib-python-headless
 black
